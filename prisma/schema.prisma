@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"  // mysql provider
+  url      = "mysql://root:manik@localhost:3306/mydb"
+}
+
+model User {
+  id       String  @id @default(uuid())
+  email    String  @unique
+  password String
+  tenants  UserTenant[]  // Many-to-many relationship with Tenant
+  createdAt DateTime @default(now())
+}
+
+model Tenant {
+  id       String  @id @default(uuid())
+  name     String  @unique
+  users    UserTenant[]  // Many-to-many relationship with User
+}
+
+model UserTenant {
+  userId   String
+  tenantId String
+  role     String   // Example: "admin", "user", "manager"
+  user     User     @relation(fields: [userId], references: [id])
+  tenant   Tenant   @relation(fields: [tenantId], references: [id])
+  @@id([userId, tenantId]) // Composite key ensures a user can't join the same tenant multiple times
+}
