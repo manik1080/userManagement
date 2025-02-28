@@ -1,26 +1,54 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# userManagement
 
-## Getting Started
+Required Features:
+- User Authentication with NextAuth.js (Email and Password)
+- Users can belong to multiple tenants
+- Role-Based Access Control
 
-First, run the development server:
+Using:
+- Prisma ORM with PostgreSQL
+- ShadCN UI Components for modern UI design
+- Zod Validation for form handling
+- Secure Password Hashing using bcryptjs
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Planned pages to be implemented:
+- Login Page: Allows users to authenticate using their email/password or social login. Redirects to the home page upon successful login.
+- Register Page: Allows for registration of new user account.
+- Logout Page: Logs users out and redirects them to the login page.
+- Home Page: Displays an overview or welcome message. If not logged in, redirects to the login page.
+- Dashboard Page: Shows user-specific information, including their assigned tenants and roles.
+- Tenants Page: Lists all tenants the user is part of and allows admins to manage tenant memberships.
+- Manage Roles Page: Enables administrators to assign or modify roles and permissions for users within a tenant.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Installation & Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the Repository
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+`git clone https://github.com/your-username/your-repo.git
+cd your-repo`
 
-## Learn More
+2. Install Dependencies
+
+`npm install`
+
+3. Setup Environment Variables by editing .env.local file in the root folder:
+
+`DATABASE_URL="postgresql://user:password@localhost:5432/yourdb"
+NEXTAUTH_SECRET="your-random-secret"
+NEXTAUTH_URL="http://localhost:3000"`
+
+4. Run Prisma migrations:
+
+`npx prisma migrate dev --name init`
+
+5. Seed the Database (Optional)
+
+`npx prisma db seed`
+
+6. Start the Development Server
+
+`npm run dev`
 
 To learn more about Next.js, take a look at the following resources:
 
